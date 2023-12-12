@@ -1,0 +1,28 @@
+{
+  "name": "fastify-postgresql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/swagger": "^8.12.1",
+    "@fastify/swagger-ui": "^2.0.1",
+    "@prisma/client": "^5.7.0",
+    "@types/node": "^20.10.4",
+    "@types/pg": "^8.10.9",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3",
+    "fastify-plugin": "^4.5.1",
+    "pg": "^8.11.3",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "prisma": "^5.7.0"
+  }
+}

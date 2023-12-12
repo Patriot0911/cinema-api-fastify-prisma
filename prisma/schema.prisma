@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Film {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String?
+
+  aFilms      AvailableFilms[]
+  cats        CategoryHasFilm[]
+  sessions    SessionInfo[]
+}
+model Hall {
+  id          Int @id @default(autoincrement())
+  name        String
+
+  sessions    SessionInfo[]
+}
+model Category {
+  id          Int @id @default(autoincrement())
+  name        String
+
+  catHasFilm  CategoryHasFilm[]
+}
+
+model AvailableFilms {
+  id          Int @id @default(autoincrement())
+  filmId      Int @unique
+
+  film        Film @relation(fields: [filmId], references: [id], onDelete: Cascade)
+}
+model CategoryHasFilm {
+  id          Int @id @default(autoincrement())
+  filmId      Int
+  catId       Int
+
+  cat         Category @relation(fields: [catId], references: [id], onDelete: Cascade)
+  film        Film @relation(fields: [filmId], references: [id], onDelete: Cascade)
+}
+
+model SessionInfo {
+  id          Int @id @default(autoincrement())
+  filmId      Int
+  hallId      Int
+  date        DateTime
+
+  film        Film @relation(fields: [filmId], references: [id], onDelete: Cascade)
+  hall        Hall @relation(fields: [hallId], references: [id], onDelete: Cascade)
+
+  tickets     Tickets[]
+}
+
+model Tickets {
+  id          Int @id @default(autoincrement())
+  ownerInfo   String
+  date        DateTime
+  sessionId   Int
+  cost        Int?
+
+  session     SessionInfo @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  vipStatuses   VipStatus[]
+}
+model VipStatus {
+  id            Int @id @default(autoincrement())
+  ticketId      Int
+
+  ticket        Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
