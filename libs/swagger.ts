@@ -6,7 +6,7 @@ export const swaggerOptions = {
                 "Explore the endpoints for each object and path so that you can get the most accurate information",
             version: "1.0.0",
         },
-        host:       "localhost",
+        host:       "localhost:8080",
         schemes:    ["http"],
         consumes:   ["application/json"],
         produces:   ["application/json"],

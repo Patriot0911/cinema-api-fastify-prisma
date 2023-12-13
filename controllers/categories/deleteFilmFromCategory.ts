@@ -13,7 +13,7 @@ const deleteFilmFromCategory = (instance: FastifyInstance) => {
                     id: parseInt(id)
                 }
             });
-            return reply.code(201).send(
+            return reply.code(200).send(
                 response
             );
         } catch(error: any) {
