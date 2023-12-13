@@ -5,9 +5,9 @@ const getAllFilms = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         try {
             const response = await instance.prisma.film.findMany();
-            return reply.code(200).send({
-                res: response
-            });
+            return reply.code(200).send(
+                response
+            );
         } catch(error: any) {
             return reply.code(500).send({
                 error: {

@@ -27,9 +27,9 @@ const getSpecifcHallSessions = (instance: FastifyInstance) => {
             );
             if(!response)
                 throw Error('No hall found');
-            return reply.code(200).send({
-                res: response
-            });
+            return reply.code(200).send(
+                response
+            );
         } catch(error: any) {
             return reply.code(500).send({
                 error: {

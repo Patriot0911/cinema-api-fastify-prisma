@@ -14,9 +14,9 @@ const postAvailable = (instance: FastifyInstance) => {
                     filmId: filmId
                 }
             });
-            return reply.code(201).send({
-                res: response
-            });
+            return reply.code(201).send(
+                response
+            );
         } catch(error: any) {
             return reply.code(500).send({
                 error: {

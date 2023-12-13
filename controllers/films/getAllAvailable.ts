@@ -13,9 +13,9 @@ const getAllAvailable = (instance: FastifyInstance) => {
                     }
                 }
             );
-            return reply.code(200).send({
-                res: response
-            });
+            return reply.code(200).send(
+                response
+            );
         } catch(error: any) {
             return reply.code(500).send({
                 error: {
