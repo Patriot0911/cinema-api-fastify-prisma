@@ -11,6 +11,11 @@ const deleteSpecificAvailable = (instance: FastifyInstance) => {
             const response = await instance.prisma.availableFilms.delete({
                 where: {
                     id: parseInt(id)
+                },
+                select: {
+                    id: true,
+                    filmId: true,
+                    film: true
                 }
             });
             if(!response)

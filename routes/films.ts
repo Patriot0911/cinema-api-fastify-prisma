@@ -9,24 +9,36 @@ import postFilm from "../controllers/films/postFilm";
 import putSpecificFilm from "../controllers/films/putSpecificFilm";
 import deleteSpecificAvailable from "../controllers/films/deleteSpecificAvailable";
 import deleteSpecificFilm from "../controllers/films/deleteSpecificFilm";
+import {
+    getAllFilmsOpts,
+    getSpecifcFilmOpts,
+    getAllAvailableOpts,
+    getSpecificAvailableOpts,
+    getFilmCategoriesOpts,
+    postFilmOpts,
+    postAvailableOpts,
+    putSpecificFilmOpts,
+    deleteSpecificAvailableOpts,
+    deleteSpecificFilmOpts
+} from "../options/films";
 
 
 const filmsRoutes = (instance: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
-    instance.get('/',               getAllFilms(instance));
-    instance.get('/:id',            getSpecifcFilm(instance));
+    instance.get('/', getAllFilmsOpts, getAllFilms(instance));
+    instance.get('/:id', getSpecifcFilmOpts, getSpecifcFilm(instance));
 
-    instance.get('/available',      getAllAvailable(instance));
-    instance.get('/available/:id',  getSpecificAvailable(instance));
+    instance.get('/available', getAllAvailableOpts, getAllAvailable(instance));
+    instance.get('/available/:id', getSpecificAvailableOpts, getSpecificAvailable(instance));
 
-    instance.get('/:id/categories', getFilmCategories(instance));
+    instance.get('/:id/categories', getFilmCategoriesOpts, getFilmCategories(instance));
 
-    instance.post('',               postFilm(instance));
-    instance.post('/available',     postAvailable(instance));
+    instance.post('', postFilmOpts, postFilm(instance));
+    instance.post('/available', postAvailableOpts, postAvailable(instance));
 
-    instance.put('/:id',            putSpecificFilm(instance));
+    instance.put('/:id', putSpecificFilmOpts, putSpecificFilm(instance));
 
-    instance.delete('/:id',             deleteSpecificFilm(instance));
-    instance.delete('/available/:id',   deleteSpecificAvailable(instance));
+    instance.delete('/:id', deleteSpecificAvailableOpts, deleteSpecificFilm(instance));
+    instance.delete('/available/:id', deleteSpecificFilmOpts, deleteSpecificAvailable(instance));
 
     done();
 };

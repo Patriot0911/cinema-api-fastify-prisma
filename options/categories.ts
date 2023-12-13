@@ -14,7 +14,20 @@ export const categoryHasFilmObject = {
     properties: {
         id: { type: 'number' },
         filmId: { type: 'number' },
-        catId: { type: 'number' },
+        catId: { type: 'number' }
+    }
+};
+export const categoryFilmObject = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        film: {
+            type: 'object',
+            properties: {
+                ...standartInfoObject.properties,
+                description: { type: 'string' }
+            }
+        }
     }
 };
 
@@ -50,13 +63,7 @@ export const getCategoryFilmsOpts: RouteShorthandOptions = {
         response: {
             200: {
                 type: 'array',
-                items: {
-                    type: 'object',
-                    properties: {
-                        id: { type: 'number' },
-                        film: standartInfoObject
-                    }
-                }
+                items: categoryFilmObject
             },
             400: errorInfoObject,
             500: errorInfoObject

@@ -5,8 +5,8 @@ import getErrorMessage from "../../libs/errorMessages";
 
 const putSpecificFilm = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
-        const { name, description } = req.body as IChangeFilmBody;
         const { id } = req.params as IGetByIdParams;
+        const { name, description } = req.body as IChangeFilmBody;
         if(!parseInt(id))
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'film']));
         if(!name && !description)
