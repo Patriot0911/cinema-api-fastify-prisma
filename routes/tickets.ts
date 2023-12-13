@@ -1,18 +1,29 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
+import getAllTickets from "../controllers/tickets/getAllTickets";
+import getSpecificTicket from "../controllers/tickets/getSpecificTicket";
+import postTicket from "../controllers/tickets/postTicket";
+import getSpecificVipTicket from "../controllers/tickets/getSpecificVipTicket";
+import getSpecificTicketVipStatus from "../controllers/tickets/getSpecificTicketVipStatus";
+import getAllTicketsVips from "../controllers/tickets/getAllTicketsVips";
+import putSpecificTicket from "../controllers/tickets/putSpecificTicket";
+import deleteSpecificTicket from "../controllers/tickets/deleteTicket";
 
 
 const ticketsRoutes = (instance: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
-    instance.get('/tickets', () => {});
-    instance.get('/tickets/:id', () => {});
+    instance.get('/', getAllTickets(instance));
+    instance.get('/:id', getSpecificTicket(instance));
+    instance.get('/:id/vip', getSpecificTicketVipStatus(instance))
 
-    instance.get('/tickets/vips', () => {});
-    instance.get('/tickets/vips/:id', () => {});
+    instance.get('/vips', getAllTicketsVips(instance));
+    instance.get('/vips/:id', getSpecificVipTicket(instance));
 
-    instance.post('/tickets', () => {});
+    instance.post('/', postTicket(instance));
 
-    instance.put('/tickets/:id', () => {});
+    instance.put('/:id', putSpecificTicket(instance));
 
-    instance.delete('/tickets/:id', () => {});
+    instance.delete('/:id', deleteSpecificTicket(instance));
+
+    done();
 };
 
 export default ticketsRoutes;

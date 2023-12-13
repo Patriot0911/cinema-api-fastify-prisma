@@ -23,3 +23,17 @@ export interface IChangeFilmBody {
 export interface IChangeCategoryBody {
     name: string;
 };
+export interface IChangeHallBody {
+    name: string;
+};
+export interface IChangeSessionBody {
+    date: Date;
+    filmId: number;
+    hallId: number;
+};
+export interface IChangeTicketBody {
+    ownerInfo: string;
+    date: Date;
+    sessionId: number;
+    cost?: number;
+};
