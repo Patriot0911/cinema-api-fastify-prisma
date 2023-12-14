@@ -5,19 +5,27 @@ import getSpecificHall from "../controllers/halls/getSpecificHall";
 import postHall from "../controllers/halls/postHall";
 import putSpecifcHall from "../controllers/halls/putSpecifcHall";
 import getSpecifcHallSessions from "../controllers/halls/getSpecifcHallSessions";
+import {
+    getAllHallsOpts,
+    getSpecificHallOpts,
+    getSpecifcHallSessionsOpts,
+    postHallOpts,
+    putSpecifcHallOpts,
+    deleteSpecificHallOpts
+} from "../options/halls";
 
 
 const hallsRoutes = (instance: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
-    instance.get('/', getAllHalls(instance));
-    instance.get('/:id', getSpecificHall(instance));
+    instance.get('/', getAllHallsOpts, getAllHalls(instance));
+    instance.get('/:id', getSpecificHallOpts, getSpecificHall(instance));
 
-    instance.get('/:id/sessions', getSpecifcHallSessions(instance))
+    instance.get('/:id/sessions', getSpecifcHallSessionsOpts, getSpecifcHallSessions(instance))
 
-    instance.post('/', postHall(instance));
+    instance.post('/', postHallOpts, postHall(instance));
 
-    instance.put('/:id', putSpecifcHall(instance));
+    instance.put('/:id', putSpecifcHallOpts, putSpecifcHall(instance));
 
-    instance.delete('/:id', deleteSpecificHall(instance));
+    instance.delete('/:id', deleteSpecificHallOpts, deleteSpecificHall(instance));
 
     done();
 };
