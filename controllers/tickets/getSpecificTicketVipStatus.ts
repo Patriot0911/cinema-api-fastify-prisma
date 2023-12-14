@@ -16,7 +16,7 @@ const getSpecificTicketVipStatus = (instance: FastifyInstance) => {
                 }
             );
             if(!response)
-                throw Error('No ticket found');
+                throw Error('No vip status found');
             return reply.code(200).send(
                 response
             );

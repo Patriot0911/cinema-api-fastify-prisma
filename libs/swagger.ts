@@ -1,3 +1,9 @@
+import { catTags } from "../options/categories";
+import { filmTags } from "../options/films";
+import { hallsTags } from "../options/halls";
+import { sessionsTags } from "../options/sessions";
+import { ticketsTags } from "../options/tickets";
+
 export const swaggerOptions = {
     swagger: {
         info: {
@@ -11,11 +17,11 @@ export const swaggerOptions = {
         consumes:   ["application/json"],
         produces:   ["application/json"],
         tags: [
-            { name: "Films",        description: "Films endpoints" },
-            { name: "Categories",   description: "Categories endpoints" },
-            { name: "Halls",        description: "Halls endpoints" },
-            { name: "Sessions",     description: "Sessions endpoints" },
-            { name: "Tickets",      description: "Tickets endpoints" }
+            { name: filmTags,           description: "Films endpoints" },
+            { name: catTags,            description: "Categories endpoints" },
+            { name: hallsTags,          description: "Halls endpoints" },
+            { name: sessionsTags,       description: "Sessions endpoints" },
+            { name: ticketsTags,        description: "Tickets endpoints" }
         ]
     }
 };

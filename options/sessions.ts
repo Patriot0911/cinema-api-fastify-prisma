@@ -7,7 +7,7 @@ export const sessionBodyObject = {
     properties: {
         filmId: { type: 'number' },
         hallId: { type: 'number' },
-        date: { type: 'date' }
+        date: { type: 'string' }
     }
 };
 export const sessionObject = {
@@ -41,7 +41,7 @@ export const getSpecificSessionOpts: RouteShorthandOptions = {
                 type: 'object',
                 properties: {
                     id: { type: 'number' },
-                    date: { type: 'date' },
+                    date: { type: 'string' },
                     film: standartInfoObject,
                     hall: standartInfoObject
                 }
@@ -63,7 +63,7 @@ export const getSpecificSessionTicketsOpts: RouteShorthandOptions = {
                     type: 'object',
                     properties: {
                         id: { type: 'number' },
-                        date: { type: 'date' },
+                        date: { type: 'string' },
                         ownerInfo: { type: 'string' }
                     }
                 }

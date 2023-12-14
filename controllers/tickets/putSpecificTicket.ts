@@ -26,7 +26,7 @@ const putSpecificTicket = (instance: FastifyInstance) => {
             })
             if(!response)
                 throw Error('No ticket found');
-            return reply.code(201).send(
+            return reply.code(200).send(
                 response
             );
         } catch(error: any) {

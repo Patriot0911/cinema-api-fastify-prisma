@@ -19,7 +19,7 @@ export const hallSessionsObject = {
     type: 'object',
     properties: {
         id: { type: 'number' },
-        date: { type: 'date' },
+        date: { type: 'string' },
         film: standartInfoObject
     }
 };
