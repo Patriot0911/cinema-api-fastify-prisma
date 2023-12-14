@@ -17,7 +17,7 @@ const putSpecifcSession = (instance: FastifyInstance) => {
             hallId && {hallId}
         );
         try {
-            const response = await instance.prisma.hall.update({
+            const response = await instance.prisma.sessionInfo.update({
                 where: {
                     id: parseInt(id)
                 },
@@ -25,7 +25,7 @@ const putSpecifcSession = (instance: FastifyInstance) => {
             })
             if(!response)
                 throw Error('No session found');
-            return reply.code(201).send(
+            return reply.code(200).send(
                 response
             );
         } catch(error: any) {

@@ -21,7 +21,7 @@ const putSpecifcHall = (instance: FastifyInstance) => {
             })
             if(!response)
                 throw Error('No hall found');
-            return reply.code(201).send(
+            return reply.code(200).send(
                 response
             );
         } catch(error: any) {

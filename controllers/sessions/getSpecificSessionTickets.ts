@@ -14,10 +14,9 @@ const getSpecificSessionTickets = (instance: FastifyInstance) => {
                         sessionId: parseInt(id)
                     },
                     select: {
-                        date: true,
                         id: true,
-                        ownerInfo: true,
-                        vipStatuses: true
+                        date: true,
+                        ownerInfo: true
                     }
                 }
             );

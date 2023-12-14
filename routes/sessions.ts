@@ -5,19 +5,27 @@ import getSpecificSession from "../controllers/sessions/getSpecificSession";
 import postSession from "../controllers/sessions/postSession";
 import putSpecifcSession from "../controllers/sessions/putSpecifcSession";
 import getSpecificSessionTickets from "../controllers/sessions/getSpecificSessionTickets";
+import {
+    getAllSessionsOpts,
+    getSpecificSessionOpts,
+    getSpecificSessionTicketsOpts,
+    postSessionOpts,
+    putSpecifcSessionOpts,
+    deleteSpecificSessionOpts
+} from "../options/sessions";
 
 
 const sessionsRoutes = (instance: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
-    instance.get('/', getAllSessions(instance));
-    instance.get('/:id', getSpecificSession(instance));
+    instance.get('/', getAllSessionsOpts, getAllSessions(instance));
+    instance.get('/:id', getSpecificSessionOpts, getSpecificSession(instance));
 
-    instance.get('/:id/tickets', getSpecificSessionTickets(instance))
+    instance.get('/:id/tickets', getSpecificSessionTicketsOpts, getSpecificSessionTickets(instance))
 
-    instance.post('/', postSession(instance));
+    instance.post('/', postSessionOpts, postSession(instance));
 
-    instance.put('/:id', putSpecifcSession(instance));
+    instance.put('/:id', putSpecifcSessionOpts, putSpecifcSession(instance));
 
-    instance.delete('/:id', deleteSpecificSession(instance));
+    instance.delete('/:id', deleteSpecificSessionOpts, deleteSpecificSession(instance));
 
     done();
 };
