@@ -2,29 +2,33 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState, IGetByIdParams } from "../../libs/types";
 import getErrorMessage from "../../libs/errorMessages";
 
+const nameAndIdSelect = {
+    id: true,
+    name: true
+};
+const selectedData = {
+    id: true,
+    date: true,
+    film: {
+        select: nameAndIdSelect
+    },
+    hall: {
+        select: nameAndIdSelect
+    }
+};
+
 const getSpecificSession = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { id } = req.params as IGetByIdParams;
         if(!parseInt(id))
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'session']));
-        const selectedData = {
-            select: {
-                id: true,
-                name: true
-            }
-        };
         try {
             const response = await instance.prisma.sessionInfo.findFirst(
                 {
                     where: {
                         id: parseInt(id)
                     },
-                    select: {
-                        id: true,
-                        date: true,
-                        film: selectedData,
-                        hall: selectedData
-                    }
+                    select: selectedData
                 }
             );
             if(!response)

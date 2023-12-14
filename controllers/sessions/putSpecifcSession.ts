@@ -8,14 +8,14 @@ const putSpecifcSession = (instance: FastifyInstance) => {
         const { date, filmId, hallId } = req.body as IChangeSessionBody;
         if(!parseInt(id))
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'session']));
-        if(!date && !filmId && !hallId)
-            return reply.code(400).send(getErrorMessage('noParamsToChange'));
         const updateData = Object.assign(
             {},
-            date && {date},
+            new Date(date) && {date},
             filmId && {filmId},
             hallId && {hallId}
         );
+        if(Object.keys(updateData).length < 1)
+            return reply.code(400).send(getErrorMessage('noParamsToChange'));
         try {
             const response = await instance.prisma.sessionInfo.update({
                 where: {

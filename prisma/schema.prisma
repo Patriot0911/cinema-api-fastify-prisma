@@ -40,6 +40,8 @@ model CategoryHasFilm {
   filmId      Int
   catId       Int
 
+  @@unique([filmId, catId])
+
   cat         Category @relation(fields: [catId], references: [id], onDelete: Cascade)
   film        Film @relation(fields: [filmId], references: [id], onDelete: Cascade)
 }
@@ -69,7 +71,7 @@ model Tickets {
 }
 model VipStatus {
   id            Int @id @default(autoincrement())
-  ticketId      Int
+  ticketId      Int @unique
 
   ticket        Tickets @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }

@@ -1,27 +1,22 @@
-import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
-import { IReturnState, IGetByIdParams } from "../../libs/types";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { IReturnState, IChangeCategoryBody, IGetByIdParams } from "../../libs/types";
 import getErrorMessage from "../../libs/errorMessages";
 
-const selectedData = {
-    id: true,
-    filmId: true,
-    film: true
-};
-
-const deleteSpecificAvailable = (instance: FastifyInstance) => {
+const putSpecificCategory = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
+        const { name } = req.body as IChangeCategoryBody;
         const { id } = req.params as IGetByIdParams;
-        if(!parseInt(id))
-            return reply.code(400).send(getErrorMessage('invalidId', ['film']));
+        if(!name || !parseInt(id))
+            return reply.code(400).send(getErrorMessage('invalidArg', ['name / id', 'category']));
         try {
-            const response = await instance.prisma.availableFilms.delete({
+            const response = await instance.prisma.category.update({
                 where: {
                     id: parseInt(id)
                 },
-                select: selectedData
+                data: {
+                    name: name
+                }
             });
-            if(!response)
-                throw Error('No film found');
             return reply.code(200).send(
                 response
             );
@@ -36,4 +31,4 @@ const deleteSpecificAvailable = (instance: FastifyInstance) => {
     };
 };
 
-export default deleteSpecificAvailable;
+export default putSpecificCategory;

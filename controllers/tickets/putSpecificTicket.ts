@@ -10,7 +10,7 @@ const putSpecificTicket = (instance: FastifyInstance) => {
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'ticket']));
         const updateData = Object.assign(
             {},
-            date && {date},
+            new Date(date) && {date},
             ownerInfo && {ownerInfo},
             sessionId && {sessionId},
             cost && {cost}

@@ -104,6 +104,24 @@ export const postFilmToCategoryOpts: RouteShorthandOptions = {
         }
     }
 };
+export const putSpecificCategoryOpts: RouteShorthandOptions = {
+    schema: {
+        tags: [catTags],
+        description: 'Update an existing category',
+        params: searchByIdObject,
+        body: {
+            type: 'object',
+            properties: {
+                name: { type: 'string' }
+            }
+        },
+        response: {
+            200: categoryObject,
+            400: errorInfoObject,
+            500: errorInfoObject
+        }
+    }
+};
 export const deleteSpecificCategoryOpts: RouteShorthandOptions = {
     schema: {
         tags: [catTags],
@@ -111,6 +129,7 @@ export const deleteSpecificCategoryOpts: RouteShorthandOptions = {
         params: searchByIdObject,
         response: {
             200: standartInfoObject,
+            400: errorInfoObject,
             500: errorInfoObject
         }
     }
@@ -122,6 +141,7 @@ export const deleteFilmFromCategoryOpts: RouteShorthandOptions = {
         params: searchByIdObject,
         response: {
             200: categoryHasFilmObject,
+            400: errorInfoObject,
             500: errorInfoObject
         }
     }

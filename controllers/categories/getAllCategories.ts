@@ -1,5 +1,3 @@
-
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState } from "../../libs/types";
 

@@ -2,6 +2,12 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IGetByIdParams, IReturnState } from "../../libs/types";
 import getErrorMessage from "../../libs/errorMessages";
 
+const selectedData = {
+    id: true,
+    filmId: true,
+    film: true
+};
+
 const getSpecificAvailable = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { id } = req.params as IGetByIdParams;
@@ -13,11 +19,7 @@ const getSpecificAvailable = (instance: FastifyInstance) => {
                     where: {
                         filmId: parseInt(id)
                     },
-                    select: {
-                        id: true,
-                        filmId: true,
-                        film: true
-                    }
+                    select: selectedData
                 }
             );
             if(!response)

@@ -2,6 +2,18 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState, IGetByIdParams } from "../../libs/types";
 import getErrorMessage from "../../libs/errorMessages";
 
+const selectedData = {
+    id: true,
+    ticket: {
+        select: {
+            id: true,
+            ownerInfo: true,
+            sessionId: true,
+            cost: true
+        }
+    }
+};
+
 const getSpecificVipTicket = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { id } = req.params as IGetByIdParams;
@@ -13,17 +25,7 @@ const getSpecificVipTicket = (instance: FastifyInstance) => {
                     where: {
                         id: parseInt(id)
                     },
-                    select: {
-                        id: true,
-                        ticket: {
-                            select: {
-                                id: true,
-                                ownerInfo: true,
-                                sessionId: true,
-                                cost: true
-                            }
-                        }
-                    }
+                    select: selectedData
                 }
             );
             if(!response)

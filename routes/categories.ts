@@ -6,6 +6,7 @@ import postCategory from "../controllers/categories/postCategory";
 import postFilmToCategory from "../controllers/categories/postFilmToCategory";
 import deleteFilmFromCategory from "../controllers/categories/deleteFilmFromCategory";
 import deleteSpecificCategory from "../controllers/categories/deleteSpecificCategory";
+import putSpecificCategory from "../controllers/categories/putSpecificCategory";
 import {
     deleteFilmFromCategoryOpts,
     deleteSpecificCategoryOpts,
@@ -13,7 +14,8 @@ import {
     getCategoryFilmsOpts,
     getSpecificCategoryOpts,
     postCategoryOpts,
-    postFilmToCategoryOpts
+    postFilmToCategoryOpts,
+    putSpecificCategoryOpts
 } from "../options/categories";
 
 const categoriesRoutes = (instance: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
@@ -25,6 +27,8 @@ const categoriesRoutes = (instance: FastifyInstance, options: FastifyPluginOptio
     instance.post('/', postCategoryOpts, postCategory(instance));
 
     instance.post('/:id', postFilmToCategoryOpts, postFilmToCategory(instance));
+
+    instance.put('/:id', putSpecificCategoryOpts, putSpecificCategory(instance));
 
     instance.delete('/:id', deleteSpecificCategoryOpts, deleteSpecificCategory(instance));
     instance.delete('/films/:id', deleteFilmFromCategoryOpts, deleteFilmFromCategory(instance));

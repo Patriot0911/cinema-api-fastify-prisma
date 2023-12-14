@@ -9,13 +9,13 @@ const putSpecificFilm = (instance: FastifyInstance) => {
         const { name, description } = req.body as IChangeFilmBody;
         if(!parseInt(id))
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'film']));
-        if(!name && !description)
-            return reply.code(400).send(getErrorMessage('noParamsToChange'));
         const updateData = Object.assign(
             {},
             name && {name},
             description && {description}
         );
+        if(Object.keys(updateData).length < 1)
+            return reply.code(400).send(getErrorMessage('noParamsToChange'));
         try {
             const response = await instance.prisma.film.update({
                 where: {

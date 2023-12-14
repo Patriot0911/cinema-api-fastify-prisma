@@ -2,6 +2,12 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState, IGetByIdParams } from "../../libs/types";
 import getErrorMessage from "../../libs/errorMessages";
 
+const selectedData = {
+    id: true,
+    date: true,
+    ownerInfo: true
+};
+
 const getSpecificSessionTickets = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { id } = req.params as IGetByIdParams;
@@ -13,11 +19,7 @@ const getSpecificSessionTickets = (instance: FastifyInstance) => {
                     where: {
                         sessionId: parseInt(id)
                     },
-                    select: {
-                        id: true,
-                        date: true,
-                        ownerInfo: true
-                    }
+                    select: selectedData
                 }
             );
             if(!response)

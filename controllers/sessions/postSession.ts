@@ -10,7 +10,7 @@ const postSession = (instance: FastifyInstance) => {
         try {
             const response = await instance.prisma.sessionInfo.create({
                 data: {
-                    date: date,
+                    date: new Date(date),
                     filmId: filmId,
                     hallId: hallId
                 }

@@ -1,16 +1,18 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState } from "../../libs/types";
 
+const selectedData = {
+    id: true,
+    filmId: true,
+    film: true
+};
+
 const getAllAvailable = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         try {
             const response = await instance.prisma.availableFilms.findMany(
                 {
-                    select: {
-                        id: true,
-                        filmId: true,
-                        film: true
-                    }
+                    select: selectedData
                 }
             );
             return reply.code(200).send(
