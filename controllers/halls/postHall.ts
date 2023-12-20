@@ -1,12 +1,9 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
-import getErrorMessage from "../../libs/errorMessages";
 import { IChangeHallBody, IReturnState } from "../../libs/types";
 
 const postHall = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { name } = req.body as IChangeHallBody;
-        if(!name)
-            return reply.code(400).send(getErrorMessage('invalidArg', ['name', 'hall']));
         try {
             const response = await instance.prisma.hall.create({
                 data: {

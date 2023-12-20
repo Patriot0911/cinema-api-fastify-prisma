@@ -1,12 +1,9 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { IReturnState, IChangeCategoryBody } from "../../libs/types";
-import getErrorMessage from "../../libs/errorMessages";
 
 const postCategory = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { name } = req.body as IChangeCategoryBody;
-        if(!name)
-            return reply.code(400).send(getErrorMessage('invalidArg', ['name', 'category']));
         try {
             const response = await instance.prisma.category.create({
                 data: {

@@ -8,8 +8,6 @@ const putSpecifcHall = (instance: FastifyInstance) => {
         const { id } = req.params as IGetByIdParams;
         if(!parseInt(id))
             return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'hall']));
-        if(!name)
-            return reply.code(400).send(getErrorMessage('noParamsToChange'));
         try {
             const response = await instance.prisma.hall.update({
                 where: {

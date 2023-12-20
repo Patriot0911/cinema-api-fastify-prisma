@@ -1,5 +1,10 @@
 import { RouteShorthandOptions } from "fastify";
-import { errorInfoObject, searchByIdObject, standartInfoObject } from "./global";
+import {
+    errorInfoObject,
+    searchByIdObject,
+    standartInfoObject
+} from "./global";
+import { filmIdBodyObject } from "./films";
 
 export const catTags = 'Categories';
 export const categoryObject = {
@@ -30,6 +35,13 @@ export const categoryFilmObject = {
         }
     }
 };
+export const categoryBodyObject = {
+    type: 'object',
+    required: ['name'],
+    properties: {
+        name: { type: 'string' }
+    }
+};
 
 export const getAllCategoriesOpts: RouteShorthandOptions = {
     schema: {
@@ -43,7 +55,6 @@ export const getAllCategoriesOpts: RouteShorthandOptions = {
             500: errorInfoObject
         }
     }
-    // ,preHandler: examplePreHandler as for example we can add some validation
 };
 export const getSpecificCategoryOpts: RouteShorthandOptions = {
     schema: {
@@ -74,12 +85,7 @@ export const postCategoryOpts: RouteShorthandOptions = {
     schema: {
         tags: [catTags],
         description: 'Create a new Category',
-        body: {
-            type: 'object',
-            properties: {
-                name: { type: 'string' }
-            }
-        },
+        body: categoryBodyObject,
         response: {
             201: categoryObject,
             400: errorInfoObject,
@@ -92,12 +98,7 @@ export const postFilmToCategoryOpts: RouteShorthandOptions = {
         tags: [catTags],
         description: 'Add a specific film to certain category',
         params: searchByIdObject,
-        body: {
-            type: 'object',
-            properties: {
-                filmId: { type: 'number' }
-            }
-        },
+        body: filmIdBodyObject,
         response: {
             201: categoryHasFilmObject,
             500: errorInfoObject
@@ -109,12 +110,7 @@ export const putSpecificCategoryOpts: RouteShorthandOptions = {
         tags: [catTags],
         description: 'Update an existing category',
         params: searchByIdObject,
-        body: {
-            type: 'object',
-            properties: {
-                name: { type: 'string' }
-            }
-        },
+        body: categoryBodyObject,
         response: {
             200: categoryObject,
             400: errorInfoObject,

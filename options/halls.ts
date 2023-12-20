@@ -11,6 +11,7 @@ export const hallObject = {
 };
 export const hallBodyObject = {
     type: 'object',
+    required: ['name'],
     properties: {
         name: { type: 'string' }
     }

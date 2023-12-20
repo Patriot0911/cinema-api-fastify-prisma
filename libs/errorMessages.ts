@@ -1,7 +1,8 @@
 const messageList = {
     unknown:            'Accured unknown error',
     invalidArg:         'Provide a valid %{0} for %{1}',
-    noParamsToChange:   'Please provide at least one parameter to change'
+    noParamsToChange:   'Please provide at least one parameter to change',
+    notValidApiKey:     'Provided Not valid API Key'
 };
 
 

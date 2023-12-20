@@ -24,6 +24,13 @@ export const filmBodyObject = {
         description: { type: 'string' }
     }
 };
+export const filmIdBodyObject = {
+    type: 'object',
+    required: ['filmId'],
+    properties: {
+        filmId: { type: 'number' }
+    }
+};
 
 export const getAllFilmsOpts: RouteShorthandOptions = {
     schema: {
@@ -101,7 +108,11 @@ export const postFilmOpts: RouteShorthandOptions = {
     schema: {
         tags: [filmTags],
         description: 'Create a new Film',
-        body: filmBodyObject,
+        body: {
+            type: 'object',
+            required: ['name'],
+            ...filmBodyObject.properties
+        },
         response: {
             201: filmObject,
             400: errorInfoObject,
@@ -113,12 +124,7 @@ export const postAvailableOpts: RouteShorthandOptions = {
     schema: {
         tags: [filmTags],
         description: 'Post film into "Now Playing" list',
-        body: {
-            type: 'object',
-            properties: {
-                filmId: { type: 'number' }
-            }
-        },
+        body: filmIdBodyObject,
         response: {
             201: {
                 type: 'object',

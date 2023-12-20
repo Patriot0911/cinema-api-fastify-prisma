@@ -1,12 +1,9 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { IChangeFilmBody, IReturnState } from "../../libs/types";
-import getErrorMessage from "../../libs/errorMessages";
 
 const postFilm = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { name, description } = req.body as IChangeFilmBody;
-        if(!name)
-            return reply.code(400).send(getErrorMessage('invalidArg', ['name', 'film']));
         try {
             const response = await instance.prisma.film.create({
                 data: {

@@ -6,8 +6,8 @@ const putSpecificCategory = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { name } = req.body as IChangeCategoryBody;
         const { id } = req.params as IGetByIdParams;
-        if(!name || !parseInt(id))
-            return reply.code(400).send(getErrorMessage('invalidArg', ['name / id', 'category']));
+        if(!parseInt(id))
+            return reply.code(400).send(getErrorMessage('invalidArg', ['id', 'category']));
         try {
             const response = await instance.prisma.category.update({
                 where: {

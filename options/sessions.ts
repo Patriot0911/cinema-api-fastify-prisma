@@ -17,6 +17,14 @@ export const sessionObject = {
         ...sessionBodyObject.properties
     }
 };
+export const sessionTicketInfoObject = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        date: { type: 'string' },
+        ownerInfo: { type: 'string' }
+    }
+};
 
 export const getAllSessionsOpts: RouteShorthandOptions = {
     schema: {
@@ -59,14 +67,7 @@ export const getSpecificSessionTicketsOpts: RouteShorthandOptions = {
         response: {
             200: {
                 type: 'array',
-                items: {
-                    type: 'object',
-                    properties: {
-                        id: { type: 'number' },
-                        date: { type: 'string' },
-                        ownerInfo: { type: 'string' }
-                    }
-                }
+                items: sessionTicketInfoObject
             },
             400: errorInfoObject,
             500: errorInfoObject
@@ -77,7 +78,11 @@ export const postSessionOpts: RouteShorthandOptions = {
     schema: {
         tags: [sessionsTags],
         description: 'Create a session',
-        body: sessionBodyObject,
+        body: {
+            type: 'object',
+            required: ['filmId', 'hallId', 'date'],
+            ...sessionBodyObject.properties
+        },
         response: {
             201: sessionObject,
             400: errorInfoObject,

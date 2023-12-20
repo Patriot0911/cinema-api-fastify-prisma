@@ -1,0 +1,3 @@
+DATABASE_URL="Postgress link"
+PORT=8080
+APIKEY="Api key"

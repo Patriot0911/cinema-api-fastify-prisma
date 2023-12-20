@@ -1,13 +1,10 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { IReturnState, IGetByIdParams, IPostFilmToBody } from "../../libs/types";
-import getErrorMessage from "../../libs/errorMessages";
 
 const postFilmToCategory = (instance: FastifyInstance) => {
     return async (req: FastifyRequest, reply: FastifyReply): Promise<IReturnState> => {
         const { id } = req.params as IGetByIdParams;
         const { filmId } = req.body as IPostFilmToBody;
-        if(!filmId)
-            return reply.code(400).send(getErrorMessage('invalidArg', ['filmId', 'film inputing']));
         try {
             const response = await instance.prisma.categoryHasFilm.create({
                 data: {

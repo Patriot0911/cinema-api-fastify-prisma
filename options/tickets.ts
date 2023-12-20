@@ -25,6 +25,23 @@ export const ticketVipStatusObject = {
         ticketId: { type: 'number' }
     }
 };
+export const ticketInfoObject = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        ownerInfo: { type: 'string' },
+        date: { type: 'string' },
+        cost: { type: 'number' },
+        session: {
+            type: 'object',
+            properties: {
+                id: { type: 'number' },
+                film: standartInfoObject,
+                hall: standartInfoObject
+            }
+        }
+    }
+};
 
 export const getAllTicketsOpts: RouteShorthandOptions = {
     schema: {
@@ -45,23 +62,7 @@ export const getSpecificTicketOpts: RouteShorthandOptions = {
         description: 'Get specific ticket',
         params: searchByIdObject,
         response: {
-            200: {
-                type: 'object',
-                properties: {
-                    id: { type: 'number' },
-                    ownerInfo: { type: 'string' },
-                    date: { type: 'string' },
-                    cost: { type: 'number' },
-                    session: {
-                        type: 'object',
-                        properties: {
-                            id: { type: 'number' },
-                            film: standartInfoObject,
-                            hall: standartInfoObject
-                        }
-                    }
-                }
-            },
+            200: ticketInfoObject,
             400: errorInfoObject,
             500: errorInfoObject
         }
