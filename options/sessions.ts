@@ -79,9 +79,8 @@ export const postSessionOpts: RouteShorthandOptions = {
         tags: [sessionsTags],
         description: 'Create a session',
         body: {
-            type: 'object',
             required: ['filmId', 'hallId', 'date'],
-            ...sessionBodyObject.properties
+            ...sessionBodyObject
         },
         response: {
             201: sessionObject,

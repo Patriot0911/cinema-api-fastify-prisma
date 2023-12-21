@@ -109,9 +109,8 @@ export const postFilmOpts: RouteShorthandOptions = {
         tags: [filmTags],
         description: 'Create a new Film',
         body: {
-            type: 'object',
             required: ['name'],
-            ...filmBodyObject.properties
+            ...filmBodyObject
         },
         response: {
             201: filmObject,
